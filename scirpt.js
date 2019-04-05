@@ -4,6 +4,7 @@ document.getElementById("btn").addEventListener("click", form_sub);
 document.getElementById("btn").addEventListener("click", update_result);
 
 
+
 function form_sub(){
 	//submits the form to the php.
 const data = new FormData();

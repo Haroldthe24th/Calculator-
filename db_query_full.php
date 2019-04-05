@@ -4,6 +4,7 @@
 	<title></title>
 </head>
 <body>
+    <center>
 	<table>
  	<tr>
  		<th>ID</th>
@@ -36,5 +37,6 @@ if ($result_query->num_rows > 0) {
 $connection->close(); 
      ?>
  </table>
+ </center>
 </body>
 </html>

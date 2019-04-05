@@ -11,8 +11,8 @@ include_once('calc_inc.php');
 
 //getting the vars from the post.
 
-$num1 = $_POST["number1"];
-$num2 = $_POST["number2"];
+$num1 = $_POST["num1"];
+$num2 = $_POST["num2"];
 $op = $_POST["op"];
 
 $opertaion = new Calc($num1, $num2, $op);
@@ -28,7 +28,6 @@ if ($connection->query($sql) === TRUE) {
 } else {
     echo "Error: " . $sql . "<br>" . $connection->error;
 }
-$connection->close();
 
 
 
