@@ -1,12 +1,12 @@
-
+  
 document.getElementById("operation").addEventListener("change", glyph_show);
 document.getElementById("btn").addEventListener("click", form_sub);
 document.getElementById("btn").addEventListener("click", update_result);
-
-
+window.onload = get_table;
+document.getElementById("btn").addEventListener("click", update_table);
 
 function form_sub(){
-	//submits the form to the php.
+  //submits the form to the php.
 const data = new FormData();
 const xhr = new XMLHttpRequest();
 
@@ -27,34 +27,91 @@ return;
 
  function update_result(){
 //gets back the result from the db.
- 	    var output = document.getElementById("output");
+      var output = document.getElementById("output");
+        var loader_result = document.getElementById("loader_result");
+               output.innerHTML =  "";
+             loader_result.style.display = "";
         const xhr_res = new XMLHttpRequest();
          xhr_res.onreadystatechange = function() {
-         	  if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState == 4 && this.status == 200) {
+              loader_result.style.display = "none";
                let result = this.responseText;
-               output.innerHTML = "Result: " + result;
+               output.innerHTML =  "=  " + result;
            }
        }
         xhr_res.open("GET", "db_query_result.php", true);
         xhr_res.send();
         return;
     }
+
+    function get_table() {
+      var loader_get = document.getElementById("loader");
+        const xhr_res = new XMLHttpRequest();
+              loader_get.style.display = "inline";
+
+         xhr_res.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               loader_get.style.display = "none";
+              var return_table_obj = JSON.parse(this.responseText);
+              var table_output  = '<tbody>'
+    for(i = 0;i < return_table_obj.length; i++){
+        table_output += '<tr>';
+        table_output += '<td id="table_row_id">' + return_table_obj[i].id + '</td>';
+        table_output += '<td>' + return_table_obj[i].operation + '</td>';
+        table_output += '<td>' + return_table_obj[i].number1 + '</td>';
+        table_output += '<td>' + return_table_obj[i].number2 + '</td>';
+        table_output += '<td>' + return_table_obj[i].result + '</td>';
+        table_output += '</tr>';
+    }
+    table_output +='</tbody>';
+    document.getElementById('table_data').innerHTML = table_output;
+           }
+       }
+        xhr_res.open("GET", "db_query.php", true);
+        xhr_res.send();
+      return;
+    }
+     function update_table() {
+        const xhr_res = new XMLHttpRequest();
+         xhr_res.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+              var return_table_obj = JSON.parse(this.responseText);
+              var table_output  = '<tbody>'
+    for(i = 0;i < return_table_obj.length; i++){
+        table_output += '<tr>';
+        table_output += "<td id='table_id "+ i"'>" + return_table_obj[i].id + '</td>';
+        table_output += '<td>' + return_table_obj[i].operation + '</td>';
+        table_output += '<td>' + return_table_obj[i].number1 + '</td>';
+        table_output += '<td>' + return_table_obj[i].number2 + '</td>';
+        table_output += '<td>' + return_table_obj[i].result + '</td>';
+        table_output += '</tr>';
+    }
+    table_output +='</tbody>';
+    document.getElementById('table_data').innerHTML = table_output;
+           }
+       }
+        xhr_res.open("GET", "db_query.php", true);
+        xhr_res.send();
+      return;
+    }
+    console.log("1")
 function glyph_show(){
 
-	let select = document.getElementById("operation").value;
-	let i_element = document.getElementById("glyph");
-	i_element.className = "";
-      console.log(select);
+  let select = document.getElementById("operation").value;
+  let i_element = document.getElementById("glyph");
+  i_element.className = "";
       if(select == "sub"){
       i_element.classList.add("far","fa-minus-square");
       } else if(select == "mul"){
-      	      i_element.classList.add("far","fa-times-circle");
+              i_element.classList.add("far","fa-times-circle");
 
       } else if(select == "add"){
        i_element.classList.add("far","fa-plus-square");
       }
-	return;
+  return;
 }
+
   /* let result = this.responseText;
                output.innerHTML = "The result is: " + result;*/
  /*  if (this.readyState == 4 && this.status == 200) {
