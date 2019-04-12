@@ -18,13 +18,14 @@ font-family: 'Roboto', sans-serif;
 #glyph {
    margin:auto;
 }
-/* Loading gif */
+
+/* Loading  gif */
 .lds-ripple {
   display: inline-block;
   position: absolute;
   top: 118px;
   left: 835px;
-  width: 64px;
+    width: 64px;
   height: 64px;
 }
 .lds-ripple div {

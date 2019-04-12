@@ -1,6 +1,6 @@
 <?php 
    include_once("db_inc.php");
-    $ret = [];
+    $res = [];
     $sql1 = "SELECT MAX(id) FROM operations";
     $sql2 = "SELECT id, operation, number1, number2, result FROM operations Order BY id DESC LIMIT 5";
 
@@ -16,13 +16,13 @@ if ($result_query->num_rows > 0) {
 
    while($row = $result_query->fetch_assoc()) {
     $obj = ["id" => $row["id"],"operation" => $row["operation"],"number1" => $row["number1"],"number2" => $row["number2"], "result" => $row["result"]];
-    array_push($ret, $obj);
+    array_push($res, $obj);
     
     }
 } else {
 
 }
-       echo json_encode($ret);
+       echo json_encode($res);
 
 
 /*
