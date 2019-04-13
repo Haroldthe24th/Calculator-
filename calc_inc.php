@@ -1,6 +1,4 @@
 <?php 
-include_once("db_inc.php");
-
 class Calc {
    
    public $num1;
