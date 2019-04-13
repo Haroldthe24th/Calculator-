@@ -1,4 +1,4 @@
- document.getElementById("operation").addEventListener("change", glyph_show);
+  document.getElementById("operation").addEventListener("change", glyph_show);
  document.getElementById("btn").addEventListener("click", form_sub);
  // document.getElementById("btn").addEventListener("click", update_result);
   window.onload = get_table;
@@ -135,7 +135,7 @@ function post_id(id){
   send_id.append("id_delete",id_delete);
   xhr.open("POST", "db_query_delete.php", true);
   xhr.send(send_id);
-  update_table();
+  update_table(id);
   return;
 }
 
